@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psikoloji Deneyi - İzmir Ekonomi Üniversitesi</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- 0. MOBİL ENGELLEME EKRANI -->
+        <div id="screen-mobile-blocked" class="screen">
+            <div class="card" style="text-align: center; padding: 3rem 2rem;">
+                <div style="font-size: 5rem; margin-bottom: 2rem;">💻</div>
+                <h1 style="color: #e11d48; margin-bottom: 1.5rem;">Cihaz Uygun Değil</h1>
+                <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 2rem;">
+                    Bu araştırma, sağlıklı veri toplanabilmesi için <b>sadece bilgisayar (masaüstü veya dizüstü)</b> üzerinden katılımı desteklemektedir.
+                </p>
+                <p style="color: var(--text-muted);">
+                    Lütfen bir bilgisayar kullanarak siteye tekrar erişiniz. İlginiz için teşekkür ederiz.
+                </p>
+            </div>
+        </div>
+
+        <!-- 1. BİLGİLENDİRİLMİŞ ONAM -->
+        <div id="screen-consent" class="screen active">
+            <div class="card">
+                <h1>Bilgilendirilmiş Onam Formu</h1>
+                <div class="consent-scroll">
+                    <p><strong>Değerli Katılımcı,</strong></p>
+                    <p>Bu araştırma, <b>İzmir Ekonomi Üniversitesi Psikoloji Bölümü lisans bitirme projesi kapsamında, Doç. Dr. Ezgi Gür danışmanlığında Sude Aldırmaz, Sıla Parmak ve Buket Tokur</b> tarafından yürütülmektedir.</p>
+                    <p>Bu çalışmanın amacı, bireylerin farklı yüz ifadelerini değerlendirme biçimlerini incelemektir. <b>Bu araştırmaya yalnızca 18–35 yaş aralığındaki bireyler katılabilmektedir.</b></p>
+                    <p>Çalışma iki bölümden oluşmaktadır. İlk bölümde katılımcılara çeşitli yüz ifadeleri sunulacak ve bu ifadelerin değerlendirilmesi istenecektir. İkinci bölümde ise bir psikolojik ölçek uygulanacaktır. Çalışma yaklaşık 10–15 dakika sürmektedir.</p>
+                    <p><b>Katılım gönüllülük esasına dayanmaktadır.</b> Katılımcılardan kimlik bilgisi toplanmayacak, veriler anonim olarak saklanacak ve yalnızca bilimsel amaçlarla kullanılacaktır. Katılımcılar istedikleri zaman çalışmadan çekilme hakkına sahiptir.</p>
+                    <p>Çalışma süreci sırasında katılımcının herhangi bir rahatsızlık hissetmesi durumunda, katılımını herhangi bir gerekçe sunmaksızın sonlandırma hakkı bulunmaktadır.</p>
+                    <p>Sorularınız için araştırmacılarla iletişime geçebilirsiniz:</p>
+                    <ul>
+                        <li>sude.aldirmaz@std.izmirekonomi.edu.tr</li>
+                        <li>sila.parmak@std.izmirekonomi.edu.tr</li>
+                        <li>buket.tokur@std.izmirekonomi.edu.tr</li>
+                    </ul>
+                    <p style="margin-top: 1rem; color: #e11d48; font-weight: 600;">⚠️ Bu deney yalnızca bilgisayar üzerinden yapılabilmektedir.</p>
+                    <p style="color: #e11d48; font-weight: 600;">⚠️ Lütfen deneye başlamadan önce internet bağlantınızın düzgün çalıştığından emin olunuz.</p>
+                </div>
+                <div class="form-group">
+                    <label class="radio-item text-sm">
+                        <input type="checkbox" id="consent-checkbox">
+                        <b>Yukarıdaki bilgileri okudum ve araştırmaya katılmayı gönüllü olarak kabul ediyorum.</b>
+                    </label>
+                </div>
+                <button id="btn-consent-next" class="btn" disabled>Onaylıyorum ve Devam Ediyorum</button>
+            </div>
+        </div>
+
+        <!-- 2. DEMOGRAFİK BİLGİ -->
+        <div id="screen-demo" class="screen">
+            <div class="card">
+                <h1>Demografik Bilgi Formu</h1>
+                <p class="text-muted" style="text-align: center; margin-bottom: 2rem;">Lütfen aşağıdaki soruları yanıtlayınız. Tüm bilgiler gizli tutulacaktır.</p>
+                
+                <div class="form-group">
+                    <label for="age">Yaşınız *</label>
+                    <input type="number" id="age" min="18" max="100" placeholder="Örn: 22">
+                </div>
+
+                <div class="form-group">
+                    <label>Cinsiyetiniz *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="gender" value="Kadın"> Kadın</label>
+                        <label class="radio-item"><input type="radio" name="gender" value="Erkek"> Erkek</label>
+                        <label class="radio-item"><input type="radio" name="gender" value="Non-binary"> Non-binary</label>
+                        <label class="radio-item"><input type="radio" name="gender" value="Belirtmek istemiyorum"> Belirtmek istemiyorum</label>
+                        <label class="radio-item"><input type="radio" name="gender" value="Diğer"> Diğer: <input type="text" id="gender-other" style="width: auto; margin-left: 5px;"></label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="education">Eğitim Durumunuz * <span style="font-weight: 400; font-size: 0.8rem; color: var(--text-muted);">(Öğrenciyseniz şu an devam etmekte olduğunuz seviyeyi belirtiniz)</span></label>
+                    <select id="education">
+                        <option value="">-- Seçiniz --</option>
+                        <option value="Lise">Lise veya dengi</option>
+                        <option value="Ön Lisans">Ön lisans</option>
+                        <option value="Lisans">Lisans</option>
+                        <option value="Yüksek Lisans">Yüksek lisans</option>
+                        <option value="Doktora">Doktora</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="occupation">Mesleğiniz *</label>
+                    <input type="text" id="occupation" placeholder="Örn: Öğrenci, Mühendis...">
+                </div>
+
+                <div class="form-group">
+                    <label>Son 6 ay içerisinde herhangi bir deneye katıldınız mı? *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="prev_exp_6m" value="Evet"> Evet</label>
+                        <label class="radio-item"><input type="radio" name="prev_exp_6m" value="Hayır"> Hayır</label>
+                    </div>
+                </div>
+                <div id="prev-exp-6m-sub" class="sub-input">
+                    <label>Lütfen nasıl bir deneydi açıklayınız:</label>
+                    <textarea id="prev-exp-6m-detail" rows="2" placeholder="Deneyin konusunu kısaca belirtiniz..."></textarea>
+                </div>
+
+                <!-- Psikiyatrik Tanı -->
+                <div class="form-group">
+                    <label>Daha önce herhangi bir psikiyatrik tanı aldınız mı? *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="psych_dx" value="Hayır"> Hayır</label>
+                        <label class="radio-item"><input type="radio" name="psych_dx" value="Evet"> Evet (lütfen belirtiniz)</label>
+                    </div>
+                    <div id="psych-dx-sub" class="sub-input">
+                        <div class="form-group">
+                            <label>Tanınızı belirtiniz:</label>
+                            <input type="text" id="psych_dx_extra" placeholder="Örn: Depresyon">
+                        </div>
+                        <div class="form-group">
+                            <label>Bu tanı için ilaç kullanıyor musunuz?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="psych_med" value="Evet"> Evet</label>
+                                <label class="radio-item"><input type="radio" name="psych_med" value="Hayır"> Hayır</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nörolojik Tanı -->
+                <div class="form-group">
+                    <label>Daha önce herhangi bir nörolojik tanı aldınız mı? *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="neuro_dx" value="Hayır"> Hayır</label>
+                        <label class="radio-item"><input type="radio" name="neuro_dx" value="Evet"> Evet (lütfen belirtiniz)</label>
+                    </div>
+                    <div id="neuro-dx-sub" class="sub-input">
+                        <div class="form-group">
+                            <label>Tanınızı belirtiniz:</label>
+                            <input type="text" id="neuro_dx_extra" placeholder="Örn: Epilepsi">
+                        </div>
+                        <div class="form-group">
+                            <label>Bu tanı için ilaç kullanıyor musunuz?</label>
+                            <div class="radio-group">
+                                <label class="radio-item"><input type="radio" name="neuro_med" value="Evet"> Evet</label>
+                                <label class="radio-item"><input type="radio" name="neuro_med" value="Hayır"> Hayır</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Daha önce kafa travması geçirdiniz mi? *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="head_trauma" value="Evet"> Evet</label>
+                        <label class="radio-item"><input type="radio" name="head_trauma" value="Hayır"> Hayır</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Görme probleminiz var mı? (Gözlük/lens kullanımı dahil) *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="vision" value="Evet"> Evet</label>
+                        <label class="radio-item"><input type="radio" name="vision" value="Hayır"> Hayır</label>
+                    </div>
+                </div>
+
+                <button id="btn-demo-next" class="btn">Devam Et</button>
+            </div>
+        </div>
+
+        <!-- 3. GÖREV YÖNERGELERİ -->
+        <section id="screen-instructions" class="screen">
+        <div class="card">
+            <h1>Yüz İfadesi Değerlendirme</h1>
+            <div class="instruction-text">
+                <p>Bu bölümde size bir dizi <b>yüz fotoğrafı</b> gösterilecektir.</p>
+                <p>Her yüz için, ifadenin size nasıl hissettirdiğini aşağıdaki manikenleri kullanarak <b>1 ile 9</b> arasında bir ölçekte değerlendiriniz.</p>
+                <p>Doğru ya da yanlış cevap yoktur. Lütfen <b>ilk izleniminize</b> göre yanıt veriniz.</p>
+                <p>Değerlendirmenizi yapmak için ilgili puanın bulunduğu yuvarlağa tıklayınız.</p>
+            </div>
+            
+            <div class="sam-scale-wrapper">
+                <div class="sam-img-crop">
+                    <img src="images/sam_new_cropped.jpg" class="sam-strip-img" alt="SAM Ölçeği">
+                </div>
+                <div class="sam-btns-row" style="pointer-events: none;">
+                    <div class="rating-btn-sam">1</div>
+                    <div class="rating-btn-sam">2</div>
+                    <div class="rating-btn-sam">3</div>
+                    <div class="rating-btn-sam">4</div>
+                    <div class="rating-btn-sam">5</div>
+                    <div class="rating-btn-sam">6</div>
+                    <div class="rating-btn-sam">7</div>
+                    <div class="rating-btn-sam">8</div>
+                    <div class="rating-btn-sam">9</div>
+                </div>
+            </div>
+
+            <button id="btn-task-start" class="btn btn-primary">Deneye başlamak için basınız</button>
+        </div>
+    </section>
+
+        <!-- 4. YÜZ PUANLAMA GÖREVİ -->
+        <div id="screen-face-task" class="screen">
+            <div class="card" style="text-align: center;">
+                <div class="image-container">
+                    <img id="stimulus-image" src="" alt="Yüz İfadesi">
+                </div>
+                <p style="font-weight: 500; margin-bottom: 0.5rem;">Gördüğünüz yüz ifadesinin size nasıl hissettirdiğini puanlayınız.</p>
+                
+                <div class="sam-scale-wrapper">
+                    <div class="sam-img-crop">
+                        <img src="images/sam_new_cropped.jpg" class="sam-strip-img" alt="SAM Ölçeği">
+                    </div>
+                    <div class="sam-btns-row" id="sam-rating-row">
+                        <button class="rating-btn-sam" data-value="1">1</button>
+                        <button class="rating-btn-sam" data-value="2">2</button>
+                        <button class="rating-btn-sam" data-value="3">3</button>
+                        <button class="rating-btn-sam" data-value="4">4</button>
+                        <button class="rating-btn-sam" data-value="5">5</button>
+                        <button class="rating-btn-sam" data-value="6">6</button>
+                        <button class="rating-btn-sam" data-value="7">7</button>
+                        <button class="rating-btn-sam" data-value="8">8</button>
+                        <button class="rating-btn-sam" data-value="9">9</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. RSQ (Reddedilme Hassasiyeti Ölçeği) -->
+        <section id="screen-rsq" class="screen">
+            <div class="card">
+                <h1>Reddedilme Hassasiyeti Ölçeği</h1>
+                <p>Aşağıda insanların başına gelebilen bazı sosyal durumlar verilmiştir. Lütfen her bir durum için verilen soruları dikkatlice okuyunuz ve size en uygun gelen seçeneği işaretleyiniz.</p>
+                
+                <div id="rsq-items-container"></div>
+                
+                <button id="btn-rsq-finish" class="btn btn-primary" style="margin-top: 2rem;">Gönder ve Bitir</button>
+            </div>
+        </section>
+
+        <!-- 6. TEŞEKKÜR -->
+        <div id="thankyou-screen" class="screen">
+            <div class="card" style="text-align: center; padding: 4rem 2.5rem;">
+                <div style="font-size: 4rem; margin-bottom: 1.5rem;">✅</div>
+                <h1>Teşekkür Ederiz!</h1>
+                <p>Yanıtlarınız başarıyla kaydedilmiştir.</p>
+                <p>Katılımınız için teşekkür ederiz. Katkılarınız sosyal algı alanındaki bilimsel bilgiye önemli bir katkı sağlayacaktır.</p>
+                
+                <div style="margin-top: 2rem; padding: 1rem; background: #f8fafc; border-radius: 0.5rem; font-size: 0.9rem;">
+                    <p style="font-weight: 600; margin-bottom: 0.5rem; color: var(--primary);">Sorularınız için araştırmacılarla iletişime geçebilirsiniz:</p>
+                    <ul style="list-style: none; padding: 0;">
+                        <li>sude.aldirmaz@std.izmirekonomi.edu.tr</li>
+                        <li>sila.parmak@std.izmirekonomi.edu.tr</li>
+                        <li>buket.tokur@std.izmirekonomi.edu.tr</li>
+                    </ul>
+                </div>
+
+                <p style="margin-top: 2rem; color: var(--text-muted); font-size: 0.875rem;">Bu tarayıcı sekmesini kapatabilirsiniz.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

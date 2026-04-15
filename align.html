@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Sürükle Bırak Hizalama</title>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 2rem; background: #f0f4f8; }
+        .control-panel { background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .sam-preview { max-width: 700px; margin: 0 auto; background: white; padding: 1rem; border-radius: 10px; position: relative; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .sam-strip-img { width: 100%; display: block; transform: scaleX(-1); user-select: none; pointer-events: none; }
+        #btnWrapper { position: absolute; bottom: 10px; left: 1rem; right: 1rem; height: 34px; }
+        .test-btn { width: 34px; height: 34px; border-radius: 50%; border: 3px solid #e11d48; background: rgba(255,255,255,0.9); display: flex; justify-content: center; align-items: center; font-weight: bold; color: #333; position: absolute; transform: translateX(-50%); cursor: grab; user-select: none; }
+        .test-btn:active { cursor: grabbing; border-color: #2563eb; background: #e0e7ff; z-index: 10; }
+        #resultCode { width: 90%; height: 100px; font-family: monospace; text-align: left; background: #1e293b; color: #10b981; padding: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel">
+        <h2 style="margin-top: 0;">Manuel Sürükle-Bırak Aracı 🎯</h2>
+        <p>Görseldeki aralıklar tam matematiksel olarak eşit değilmiş (çizim hatası vs. kaynaklı).<br>Bu yüzden "hepsini aynı oranda diz" çalışmadı.</p>
+        <p><b>ÇÖZÜM:</b> Lütfen aşağıdaki 9 butonu fareyle tutup <b>KENDİ ELİNLE</b> tek tek sağa sola çekerek fotoğraftaki adamların tam altlarına veya boşluklarına kaydır.<br>Bıraktığında alttaki kutuda beliren kodları doğrudan kopyalayıp bana at!</p>
+        <textarea id="resultCode" readonly></textarea>
+        <p id="copyMsg" style="color: green; font-weight: bold; display: none;">Kopyalandı!</p>
+    </div>
+
+    <div class="sam-preview" id="previewBox">
+        <img src="images/sam_new_cropped.jpg" class="sam-strip-img">
+        <div id="btnWrapper">
+            <!-- Başlangıçta kabaca dizili -->
+            <div class="test-btn" id="b1" style="left: 10%;">1</div>
+            <div class="test-btn" id="b2" style="left: 20%;">2</div>
+            <div class="test-btn" id="b3" style="left: 30%;">3</div>
+            <div class="test-btn" id="b4" style="left: 40%;">4</div>
+            <div class="test-btn" id="b5" style="left: 50%;">5</div>
+            <div class="test-btn" id="b6" style="left: 60%;">6</div>
+            <div class="test-btn" id="b7" style="left: 70%;">7</div>
+            <div class="test-btn" id="b8" style="left: 80%;">8</div>
+            <div class="test-btn" id="b9" style="left: 90%;">9</div>
+        </div>
+    </div>
+
+    <script>
+        const wrapper = document.getElementById('btnWrapper');
+        const codeBox = document.getElementById('resultCode');
+        const copyMsg = document.getElementById('copyMsg');
+        let dragging = null;
+
+        function updateCode() {
+            let output = "/* KUSURSUZ YERLER */\n";
+            document.querySelectorAll('.test-btn').forEach((btn, index) => {
+                let leftVal = btn.style.left;
+                output += `.rating-btn-sam[data-value="${index+1}"] { left: ${leftVal}; }\n`;
+            });
+            codeBox.value = output;
+        }
+
+        document.addEventListener('mousedown', e => {
+            if (e.target.classList.contains('test-btn')) {
+                dragging = e.target;
+            }
+        });
+
+        document.addEventListener('mousemove', e => {
+            if (!dragging) return;
+            const rect = wrapper.getBoundingClientRect();
+            let pct = ((e.clientX - rect.left) / rect.width) * 100;
+            // Sınırla
+            if(pct < 0) pct = 0;
+            if(pct > 100) pct = 100;
+            
+            dragging.style.left = pct.toFixed(2) + '%';
+            updateCode();
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (dragging) {
+                dragging = null;
+                updateCode();
+            }
+        });
+
+        // Tıklayınca kopyalama kolaylığı
+        codeBox.onclick = function() {
+            this.select();
+            document.execCommand('copy');
+            copyMsg.style.display = 'block';
+            setTimeout(() => { copyMsg.style.display = 'none'; }, 2000);
+        }
+
+        updateCode();
+    </script>
+</body>
+</html>
